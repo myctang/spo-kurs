@@ -1,27 +1,11 @@
 ( print odd if the number is odd, print even if the number is even )
 : isOdd 2 % if 1 else 0 then ;
 
-( push 1 if the number is prime, else push 0 )
-: isPrimeDoLoop
-	dup 2 < if 
-		0
-	else
-		dup 2 do
-		 	dup r@ swap 1 - = if
-				1
-			else
-				dup r@ % 0 = if
-					cr r> drop dup 1 - >r drop 0
-				then
-			then
-		loop
-	then
-;
-
 ( a b -- a b a b )
 : dupTwo swap dup rot dup rot rot ;
 
-: isPrime
+( push 1 if the number is prime, else push 0 )
+: isPrimeDoLoop
 	dup 2 < if
 		0
 	else
@@ -38,6 +22,7 @@
 		until
 	then
 ;
+
 
 ( write to the memory a number from stack, push to the stack the memory address )
 : writeToMem 1 allot dup rot swap ! ;
