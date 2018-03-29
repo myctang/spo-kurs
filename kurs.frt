@@ -1,5 +1,5 @@
 ( print odd if the number is odd, print even if the number is even )
-: isOdd 2 % if ." odd" cr else ." even" cr then ;
+: isOdd 2 % if 1 else 0 then ;
 
 ( push 1 if the number is prime, else push 0 )
 : isPrimeDoLoop
@@ -15,6 +15,27 @@
 				then
 			then
 		loop
+	then
+;
+
+( a b -- a b a b )
+: dupTwo swap dup rot dup rot rot ;
+
+: isPrime
+	dup 2 < if
+		0
+	else
+		dup 1 - repeat
+			dup 1 = if
+				drop drop 1 1
+			else
+				dupTwo % 0 = if
+					drop drop 0 1
+				else
+					1 - 0
+				then
+			then
+		until
 	then
 ;
 
@@ -37,8 +58,7 @@
   drop
 ;
 
-( a b -- a b a b )
-: dupTwo swap dup rot dup rot rot ;
+
 
 ( push the total length of 2 strings )
 : two-str-len
@@ -69,14 +89,14 @@
 
 ( make colatz series on the stack )
 : colatz
+	dup . cr
 	repeat
 		dup 1 = if
-			1
 		else
 			dup 2 % 0 = if
-				dup 2 /
+				2 / dup . cr
 			else
-				dup 3 * 1 +
+				3 * 1 + dup . cr
 			then
 			0
 		then
